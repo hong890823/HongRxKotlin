@@ -108,7 +108,7 @@ class Observable <T> constructor(val onSubscribe: OnSubscribe<T>){
                 实际的最后观察者会在这里被切换到不同的线程中操作。当然有最后决定权的observeOn
                 就是最后一个observeOn方法。
                 * */
-                this@Observable.subscribe(object : Subscriber<T>(){
+                this@Observable.subscribe(object : Subscriber<T>(){//能够调用observeOn的被观察者就是MainActivity中map_函数产生的被观察者
                     override fun onComplete() {
                         worker.schedule(java.lang.Runnable { subscriber.onComplete() })
                     }
